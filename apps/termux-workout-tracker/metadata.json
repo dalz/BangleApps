@@ -4,6 +4,7 @@
   "version": "0.01",
   "description": "TODO",
   "supports": ["BANGLEJS2"],
+  "interface": "interface.html",
   "storage": [
     {"name":"termux-workout.app.js","url":"app.js"},
     {"name":"termux-workout.settings.js","url":"settings.js"}
