@@ -10,7 +10,7 @@
             <input type="text" id="short-name" name="short-name"><br>
             <label for="long-name">Long name:</label><br>
             <input type="text" id="long-name" name="long-name"><br>
-            <label for="default_reps">Default default_reps:</label><br>
+            <label for="default_reps">Default repetitions:</label><br>
             <input type="number" id="default-reps" name="default-reps" min="1"><br>
             <input type="add" value="Add">
         </form>
@@ -90,8 +90,8 @@
 
              exs_json.append({
                  short: document.getElementById("short-name").value,
-                 long: document.getElementById("long-name").value
-                 default_reps: document.getElementById("default-reps").value;
+                 long: document.getElementById("long-name").value,
+                 default_reps: document.getElementById("default-reps").value
              });
 
              display_data();
