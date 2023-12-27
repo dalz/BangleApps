@@ -4,20 +4,15 @@ let buzz = require("buzz");
 
 Bangle.loadWidgets();
 
-let default_rep_count = 6;
+let Storage = require('Storage');
 
 var settings = Object.assign({
   rest_time_secs: 120,
-}, require('Storage').readJSON("termux-workout.json", true) || {});
+}, Storage.readJSON("termux-workout.json", true) || {});
 
-let exs = [
-  {short: "pull", long: "tucked L-sit pull-ups", sets: []},
-  {short: "pike", long: "pike push-ups #2", sets: []},
-  {short: "rows", long: "incline archer rows / dritte #1", sets: []},
-  {short: "push", long: "ring push-ups", sets: []},
-  {short: "face", long: "face pulls", sets: []},
-  {short: "curls", long: "bicep curls", sets: []},
-];
+let exs = Storage.readJSON("termux-workout.exs.json", true) || [];
+
+delete Storage;
 
 let exs_per_page = 4;
 let num_pages = Math.ceil(exs.length / exs_per_page);
@@ -94,7 +89,7 @@ function registerReps(i) {
 
   count_layout.update();
 
-  let n = sets[sets.length - 1] || default_rep_count;
+  let n = sets[sets.length - 1] || exs[i].default_reps;
   count_layout.reps.label = n;
   count_layout.render();
 
