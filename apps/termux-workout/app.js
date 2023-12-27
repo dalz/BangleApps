@@ -11,6 +11,7 @@ var settings = Object.assign({
 }, Storage.readJSON("termux-workout.json", true) || {});
 
 let exs = Storage.readJSON("termux-workout.exs.json", true) || [];
+exs.forEach(ex => ex.sets = []);
 
 delete Storage;
 
