@@ -12,7 +12,7 @@
             <input type="text" id="long-name" name="long-name"><br>
             <label for="default_reps">Default repetitions:</label><br>
             <input type="number" id="default-reps" name="default-reps" min="1"><br>
-            <input type="add" value="Add">
+            <input type="submit" value="Add">
         </form>
 
         <button class="btn btn-default" id="btn-save">Save</button>
@@ -32,11 +32,13 @@
 
              Util.readStorageFile(file, data => {
                  Util.hideModal();
+                 console.log(data);
 
                  try {
                      exs_json = JSON.parse(data);
                  } catch (e) {
                      data_elem.innerHTML = `<pre>${e.toString()}</pre>`;
+                     return;
                  }
 
                  display_data();
