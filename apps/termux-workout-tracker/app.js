@@ -8,7 +8,7 @@ let default_rep_count = 6;
 
 var settings = Object.assign({
   rest_time_secs: 120,
-}, require('Storage').readJSON("termux-workout-tracker.json", true) || {});
+}, require('Storage').readJSON("termux-workout.json", true) || {});
 
 let exs = [
   {short: "pull", long: "tucked L-sit pull-ups", sets: []},
@@ -107,7 +107,7 @@ function registerReps(i) {
 
 function setRestTimer() {
   sched.setAlarm("rest-timer", {
-    //appid: "",
+    appid: "termux-workout",
     msg: "rest timer",
     on: true,
     timer: settings.rest_time_secs * 1000,

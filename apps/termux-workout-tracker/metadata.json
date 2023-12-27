@@ -1,12 +1,12 @@
 {
-  "id": "termux-workout-tracker",
+  "id": "termux-workout",
   "name": "Workout Tracker (Termux)",
   "version": "0.01",
   "description": "TODO",
   "supports": ["BANGLEJS2"],
   "storage": [
-    {"name":"termux-workout-tracker.app.js","url":"app.js"},
-    {"name":"termux-workout-tracker.settings.js","url":"settings.js"}
+    {"name":"termux-workout.app.js","url":"app.js"},
+    {"name":"termux-workout.settings.js","url":"settings.js"}
   ],
-  "data": [{"name":"termux-workout-tracker.json"}]
+  "data": [{"name":"termux-workout.json"}]
 }

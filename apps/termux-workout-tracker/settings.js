@@ -1,5 +1,5 @@
 (function(back) {
-  var FILE = "termux-workout-tracker.json";
+  var FILE = "termux-workout.json";
 
   var settings = Object.assign({
     rest_time_secs: 120,
