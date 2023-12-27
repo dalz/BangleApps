@@ -44,11 +44,15 @@
          }
 
          function display_data() {
-             let ex_row = exs_json.map(ex =>
+             let ex_row = exs_json.map((ex, i) =>
                  `<tr>
                           <td>${ex.short}</td>
                           <td>${ex.long}</td>
                           <td>${ex.default_reps}</td>
+                          <td>
+                              <button onclick="move_ex(${i}, -1)">▲</button>
+                              <button onclick="move_ex(${i}, 1)">▼</button>
+                              <button onclick="delete_ex(${i})">X</button>
                       </tr>`
              ).join("\n");
 
@@ -61,6 +65,24 @@
                      </tr>
                      ${ex_rows}
                  </table>`;
+         }
+
+         function move_ex(i, by) {
+             let j = i + by;
+
+             if (j < 0 || j >= exs_json.length)
+                 return;
+
+             let tmp = exs_json[i];
+             exs_json[i] = exs_json[j];
+             exs_json[j] = tmp;
+
+             display_data();
+         }
+
+         function delete_ex(i) {
+             exs_json.splice(i, 1);
+             dispaly_data();
          }
 
          document.getElementById("ex-form").addEventListener("add", event => {
