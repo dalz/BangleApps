@@ -4,6 +4,17 @@
     </head>
     <body>
         <div id="data"></div>
+
+        <form id="ex-form">
+            <label for="short-name">Short name:</label><br>
+            <input type="text" id="short-name" name="short-name"><br>
+            <label for="long-name">Long name:</label><br>
+            <input type="text" id="long-name" name="long-name"><br>
+            <label for="default_reps">Default default_reps:</label><br>
+            <input type="number" id="default-reps" name="default-reps" min="1"><br>
+            <input type="add" value="Add">
+        </form>
+
         <button class="btn btn-default" id="btn-save">Save</button>
         <button class="btn btn-default" id="btn-delete">Delete</button>
 
@@ -28,25 +39,41 @@
                      data_elem.innerHTML = `<pre>${e.toString()}</pre>`;
                  }
 
-                 let ex_rows = data.map(ex =>
-                     `<tr>
+                 display_data();
+             });
+         }
+
+         function display_data() {
+             let ex_row = exs_json.map(ex =>
+                 `<tr>
                           <td>${ex.short}</td>
                           <td>${ex.long}</td>
                           <td>${ex.default_reps}</td>
                       </tr>`
-                 ).join("\n");
+             ).join("\n");
 
-                 data_elem.innerHTML = `
-                     <table>
-                         <tr>
-                             <th>Short name</th>
-                             <th>Long name</th>
-                             <th>Default reps</th>
-                         </tr>
-                         ${ex_rows}
-                     </table>`;
-             });
+             data_elem.innerHTML = `
+                 <table>
+                     <tr>
+                         <th>Short name</th>
+                         <th>Long name</th>
+                         <th>Default reps</th>
+                     </tr>
+                     ${ex_rows}
+                 </table>`;
          }
+
+         document.getElementById("ex-form").addEventListener("add", event => {
+             event.preventDefault();
+
+             exs_json.append({
+                 short: document.getElementById("short-name").value,
+                 long: document.getElementById("long-name").value
+                 default_reps: document.getElementById("default-reps").value;
+             });
+
+             display_data();
+         });
 
          document.getElementById("btn-save").addEventListener("click", () => {
              Util.showModal("Saving...");
@@ -60,6 +87,7 @@
                  get_data();
              });
          });
+
 
          function onInit() {
              get_data();
