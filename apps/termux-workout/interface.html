@@ -22,7 +22,7 @@
         <script>
          let data_elem = document.getElementById("data");
 
-         let file = "termux-workout.ex.json";
+         let file = "termux-workout.exs.json";
          let exs_json;
 
          function get_data() {
@@ -32,7 +32,6 @@
 
              Util.readStorageFile(file, data => {
                  Util.hideModal();
-                 console.log(data);
 
                  try {
                      exs_json = JSON.parse(data);
