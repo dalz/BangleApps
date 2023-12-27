@@ -104,7 +104,7 @@
 
          document.getElementById("btn-delete").addEventListener("click", () => {
              Util.showModal("Deleting...");
-             Util.eraseStorageFile(file,  {
+             Util.eraseStorageFile(file,  () => {
                  Util.hideModal();
                  get_data();
              });
