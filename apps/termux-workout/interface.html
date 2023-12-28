@@ -30,16 +30,9 @@
 
              data_elem.innerHTML = "";
 
-             Util.readStorageFile(file, data => {
+             Util.readStorageJSON(file, data => {
                  Util.hideModal();
-
-                 try {
-                     exs_json = JSON.parse(data);
-                 } catch (e) {
-                     data_elem.innerHTML = `<pre>${e.toString()}</pre>`;
-                     return;
-                 }
-
+                 exs_json = data;
                  display_data();
              });
          }
@@ -105,7 +98,7 @@
 
          document.getElementById("btn-delete").addEventListener("click", () => {
              Util.showModal("Deleting...");
-             Util.eraseStorageFile(file,  () => {
+             Util.eraseStorage(file,  () => {
                  Util.hideModal();
                  get_data();
              });
