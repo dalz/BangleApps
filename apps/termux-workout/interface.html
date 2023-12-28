@@ -5,15 +5,15 @@
     <body>
         <div id="data"></div>
 
-        <form id="ex-form">
+        <div>
             <label for="short-name">Short name:</label><br>
             <input type="text" id="short-name" name="short-name"><br>
             <label for="long-name">Long name:</label><br>
             <input type="text" id="long-name" name="long-name"><br>
             <label for="default_reps">Default repetitions:</label><br>
             <input type="number" id="default-reps" name="default-reps" min="1"><br>
-            <input type="submit" value="Add">
-        </form>
+            <button class="btn btn-default" onclick="add_exercise()">Add</button>
+        </div>
 
         <button class="btn btn-default" id="btn-save">Save</button>
         <button class="btn btn-default" id="btn-delete">Delete</button>
@@ -32,7 +32,7 @@
 
              Util.readStorageJSON(file, data => {
                  Util.hideModal();
-                 exs_json = data;
+                 exs_json = data || [];
                  display_data();
              });
          }
@@ -44,9 +44,12 @@
                           <td>${ex.long}</td>
                           <td>${ex.default_reps}</td>
                           <td>
-                              <button onclick="move_ex(${i}, -1)">▲</button>
-                              <button onclick="move_ex(${i}, 1)">▼</button>
-                              <button onclick="delete_ex(${i})">X</button>
+                              <button class="btn btn-default"
+                                      onclick="move_ex(${i}, -1)">▲</button>
+                              <button class="btn btn-default"
+                                      onclick="move_ex(${i}, 1)">▼</button>
+                              <button class="btn btn-default"
+                              onclick="delete_ex(${i})">X</button>
                       </tr>`
              ).join("\n");
 
@@ -76,24 +79,22 @@
 
          function delete_ex(i) {
              exs_json.splice(i, 1);
-             dispaly_data();
+             display_data();
          }
 
-         document.getElementById("ex-form").addEventListener("add", event => {
-             event.preventDefault();
-
-             exs_json.append({
+         function add_exercise() {
+             exs_json.push({
                  short: document.getElementById("short-name").value,
                  long: document.getElementById("long-name").value,
-                 default_reps: document.getElementById("default-reps").value
+                 default_reps: parseInt(document.getElementById("default-reps").value)
              });
 
              display_data();
-         });
+         }
 
          document.getElementById("btn-save").addEventListener("click", () => {
              Util.showModal("Saving...");
-             Util.writeStorage(file, exs_json.toString(), Util.hideModal);
+             Util.writeStorage(file, JSON.stringify(exs_json), Util.hideModal);
          });
 
          document.getElementById("btn-delete").addEventListener("click", () => {
